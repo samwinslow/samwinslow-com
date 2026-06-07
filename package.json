@@ -1,0 +1,25 @@
+{
+  "name": "samwinslow-com",
+  "version": "1.0.0",
+  "description": "Statically-generated minimal personal site",
+  "homepage": "https://github.com/samwinslow/samwinslow-com#readme",
+  "bugs": {
+    "url": "https://github.com/samwinslow/samwinslow-com/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samwinslow/samwinslow-com.git"
+  },
+  "author": "samwinslow",
+  "scripts": {
+    "build": "tsx src/build.ts",
+    "dev": "npx serve dist"
+  },
+  "devDependencies": {
+    "@types/mustache": "^4.2.6",
+    "esbuild": "^0.28.0",
+    "mustache": "^4.2.0",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3"
+  }
+}
