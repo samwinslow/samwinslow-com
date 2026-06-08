@@ -1,7 +1,146 @@
-html, body {
-  font-family: sans-serif;
+:root {
+  --base-font-family: "Palatino", "Hoefler Text", "Book Antiqua", "Cambria", "Times New Roman", "Times", serif;
+  --head-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --mono-font-family: "SFMono-Regular",Consolas,"Liberation Mono",Menlo,Courier,monospace;
+  --text: #000;
+  --muted: #bbb;
+  --tree-nav-background: transparent;
+  --light: rgba(0,10,20,0.15);
+  /* --link: hsl(180, 80%, 32%); */
+  --link: blue;
+  --bg-light: rgba(0,10,20,0.05);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: var(--base-font-family);
+  line-height: 1.618;
+  font-size: 16px;
+  color: var(--text);
+}
+
+section {
+  margin-top: 3rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--head-font-family);
+  line-height: 1;
+}
+
+h1 {
+  font-weight: 500;
+}
+
+h2 {
+  font-weight: 500;
+}
+
+h3 {
+  font-weight: 400;
+}
+
+p {
+  margin-bottom: 0.618rem;
+}
+
+a {
+  color: var(--link);
+  text-decoration: underline;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 .uppercase {
   text-transform: uppercase;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  border-radius: 0.2rem;
+}
+
+img.responsive {
+  object-fit: cover;
+}
+
+table {
+  font-size: 0.7rem;
+}
+
+td, th {
+  text-align: left;
+  padding: 0.15rem 0.5rem;
+}
+
+thead td, thead th {
+  border-bottom: 1px solid var(--text);
+}
+
+hr {
+  border: none;
+  border-bottom: 1px solid var(--light);
+}
+
+pre, code {
+  font-family: var(--mono-font-family);
+  line-height: 1.2;
+}
+
+pre {
+  padding: 0.4rem 0.8rem;
+  background-color: var(--bg-light);
+  border-radius: 0.4rem;
+}
+
+code {
+  font-size: 80%;
+  border-radius: 0.2rem;
+}
+
+.slug-item {
+  background: var(--tree-nav-background);
+  border: 1px solid var(--light);
+  display: inline-block;
+  margin-right: 0.4em;
+  padding: 0.3em 0.4em;
+  border-radius: 0.2em;
+  font-size: 85%;
+  line-height: 1;
+}
+
+.container {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 3rem 1rem 6rem 1rem;
+}
+
+.container-wide {
+  max-width: 50rem;
+}
+
+.backToHome {
+  margin: 3rem 0 0;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+iframe {
+  border: none;
+}
+
+header, footer {
+  padding: 1rem;
 }

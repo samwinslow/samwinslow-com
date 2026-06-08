@@ -6,7 +6,14 @@ import { buildPosts } from "./build-posts.js";
 
 async function main() {
   const distDir = path.resolve("dist");
-  fs.mkdirSync(distDir, { recursive: true });
+  const cacheFlag = path.join(distDir, ".cache");
+
+  if (!fs.existsSync(cacheFlag)) {
+    fs.rmSync(distDir, { recursive: true, force: true });
+    fs.mkdirSync(distDir, { recursive: true });
+    fs.writeFileSync(cacheFlag, "");
+    console.log("First load: cleared dist/");
+  }
 
   const posts = await buildPosts(distDir);
   const visiblePosts = posts

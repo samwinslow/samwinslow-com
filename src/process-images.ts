@@ -22,6 +22,18 @@ export async function processImage(
   const base = path.basename(srcPath, ext);
   const originalFilename = path.basename(srcPath);
   const webpFilename = `${base}.webp`;
+  const outOriginal = path.join(imgOutDir, originalFilename);
+  const outWebp = path.join(imgOutDir, webpFilename);
+
+  if (fs.existsSync(outOriginal) && fs.existsSync(outWebp)) {
+    const { width } = await sharp(outWebp).metadata();
+    console.log(`  img: ${originalFilename} (cached)`);
+    return {
+      imgSrc: `/img/${originalFilename}`,
+      webpSrc: `/img/${webpFilename}`,
+      width: width ?? MAX_WIDTH,
+    };
+  }
 
   const image = sharp(srcPath);
   const { width: origWidth } = await image.metadata();
@@ -36,6 +48,7 @@ export async function processImage(
     .webp({ quality: 85 })
     .toFile(path.join(imgOutDir, webpFilename));
 
+  console.log(`  img: ${originalFilename} → webp @ ${outWidth}w`);
   return {
     imgSrc: `/img/${originalFilename}`,
     webpSrc: `/img/${webpFilename}`,

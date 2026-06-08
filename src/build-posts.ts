@@ -82,10 +82,7 @@ export async function buildPosts(distDir: string): Promise<PostEntry[]> {
       const filename = normalizeFilename(src);
       if (processed.has(filename)) continue;
       const result = await processImage(path.join(staticImgDir, filename), imgOutDir);
-      if (result) {
-        processed.set(filename, result);
-        console.log(`  img: ${filename} → webp + original @ ${result.width}w`);
-      }
+      if (result) processed.set(filename, result);
     }
 
     // Rewrite frontmatter image to webp src
