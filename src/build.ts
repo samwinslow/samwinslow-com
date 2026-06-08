@@ -8,7 +8,7 @@ async function main() {
   const distDir = path.resolve("dist");
   fs.mkdirSync(distDir, { recursive: true });
 
-  const posts = buildPosts(distDir);
+  const posts = await buildPosts(distDir);
   const visiblePosts = posts
     .filter((p) => !p.archived)
     .sort((a, b) => (a.date < b.date ? 1 : -1));

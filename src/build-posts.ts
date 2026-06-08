@@ -2,7 +2,8 @@ import fs from "fs";
 import path from "path";
 import Mustache from "mustache";
 import matter from "gray-matter";
-import { marked } from "marked";
+import { Marked } from "marked";
+import { processImage, type ProcessedImage } from "./process-images.js";
 
 export interface PostFrontmatter {
   date: string;
@@ -25,22 +26,41 @@ function toImgPath(src: string): string {
   return `/img/${src.replace(/^\.\//, "")}`;
 }
 
-function rewriteImagePaths(content: string): string {
-  return content.replace(
-    /!\[([^\]]*)\]\(([^)]+)\)/g,
-    (_, alt, src) => `![${alt}](${toImgPath(src)})`
+function isRelative(src: string): boolean {
+  return !src.startsWith("http://") && !src.startsWith("https://") && !src.startsWith("/");
+}
+
+function normalizeFilename(src: string): string {
+  return src.replace(/^\.\//, "");
+}
+
+function extractImageSrcs(content: string): string[] {
+  const srcs: string[] = [];
+  const re = /!\[[^\]]*\]\(([^)]+)\)/g;
+  let match;
+  while ((match = re.exec(content)) !== null) {
+    srcs.push(match[1]);
+  }
+  return srcs;
+}
+
+function picture(img: ProcessedImage, alt: string, title: string | null): string {
+  const titleAttr = title ? ` title="${title}"` : "";
+  return (
+    `<picture>` +
+    `<source type="image/webp" srcset="${img.webpSrc} ${img.width}w">` +
+    `<img src="${img.imgSrc}" alt="${alt}"${titleAttr} loading="lazy">` +
+    `</picture>`
   );
 }
 
-export function buildPosts(distDir: string): PostEntry[] {
+export async function buildPosts(distDir: string): Promise<PostEntry[]> {
   const postsDir = path.resolve("src/posts");
   if (!fs.existsSync(postsDir)) return [];
 
   const files = fs.readdirSync(postsDir).filter((f) => f.endsWith(".mdx"));
-  const template = fs.readFileSync(
-    path.resolve("src/partials/post.html"),
-    "utf-8"
-  );
+  const template = fs.readFileSync(path.resolve("src/partials/post.html"), "utf-8");
+  const imgOutDir = path.join(distDir, "img");
 
   const entries: PostEntry[] = [];
 
@@ -50,16 +70,53 @@ export function buildPosts(distDir: string): PostEntry[] {
     const { data, content } = matter(raw);
     const frontmatter = data as PostFrontmatter;
 
-    if (frontmatter.image) {
-      frontmatter.image = toImgPath(frontmatter.image);
+    // Collect all relative image references from body + frontmatter
+    const imgSrcs = extractImageSrcs(content);
+    if (frontmatter.image) imgSrcs.push(frontmatter.image);
+
+    // Process each unique relative image
+    const staticImgDir = path.resolve("static", "img");
+    const processed = new Map<string, ProcessedImage>();
+    for (const src of imgSrcs) {
+      if (!isRelative(src)) continue;
+      const filename = normalizeFilename(src);
+      if (processed.has(filename)) continue;
+      const result = await processImage(path.join(staticImgDir, filename), imgOutDir);
+      if (result) {
+        processed.set(filename, result);
+        console.log(`  img: ${filename} → webp + original @ ${result.width}w`);
+      }
     }
+
+    // Rewrite frontmatter image to webp src
+    if (frontmatter.image && isRelative(frontmatter.image)) {
+      const filename = normalizeFilename(frontmatter.image);
+      const result = processed.get(filename);
+      frontmatter.image = result ? result.webpSrc : toImgPath(frontmatter.image);
+    }
+
+    // Custom renderer: emit <picture> for local images, plain <img> for external
+    const customMarked = new Marked({
+      renderer: {
+        image({ href, title, text }) {
+          if (!isRelative(href)) {
+            return `<img src="${href}" alt="${text}"${title ? ` title="${title}"` : ""}>`;
+          }
+          const filename = normalizeFilename(href);
+          const result = processed.get(filename);
+          return result
+            ? picture(result, text, title)
+            : `<img src="${toImgPath(href)}" alt="${text}"${title ? ` title="${title}"` : ""}>`;
+        },
+      },
+    });
 
     const outDir = path.join(distDir, "post", slug);
     fs.mkdirSync(outDir, { recursive: true });
 
     const html = Mustache.render(template, {
       ...frontmatter,
-      body: marked(rewriteImagePaths(content)) as string,
+      body: customMarked.parse(content) as string,
       copyright_year: new Date().getFullYear(),
     });
 

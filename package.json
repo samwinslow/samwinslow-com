@@ -17,22 +17,29 @@
     "dev": "concurrently \"npm run watch\" \"serve dist\""
   },
   "nodemonConfig": {
-    "watch": ["src", "static"],
+    "watch": [
+      "src",
+      "static"
+    ],
     "ext": "ts,html,mdx,css,scss,png,jpg,jpeg,gif,svg,ico,webp,woff,woff2,ttf,eot,otf,json",
     "exec": "tsx src/build.ts"
   },
-  "devDependencies": {
-    "@types/marked": "^5.0.2",
-    "@types/mustache": "^4.2.6",
-    "@types/node": "^25.9.2",
+  "dependencies": {
     "concurrently": "^10.0.3",
     "esbuild": "^0.28.0",
     "gray-matter": "^4.0.3",
     "marked": "^18.0.5",
     "mustache": "^4.2.0",
     "nodemon": "^3.1.14",
+    "sharp": "^0.34.5",
+    "tsx": "^4.22.4"
+  },
+  "devDependencies": {
+    "@types/marked": "^5.0.2",
+    "@types/mustache": "^4.2.6",
+    "@types/node": "^25.9.2",
+    "@types/sharp": "^0.31.1",
     "serve": "^14.2.6",
-    "tsx": "^4.22.4",
     "typescript": "^6.0.3"
   }
 }
