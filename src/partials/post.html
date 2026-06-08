@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title }} — Sam Winslow</title>
+    <link rel="stylesheet" href="/css/index.css" />
+  </head>
+  <body>
+    <header>
+      <a href="/" class="uppercase">← Sam Winslow</a>
+    </header>
+    <main>
+      <article>
+        <h1>{{ title }}</h1>
+        <p class="post-meta">
+          <time datetime="{{ date }}">{{ date }}</time>
+          {{# copy }}<span class="post-copy"> — {{ copy }}</span>{{/ copy }}
+        </p>
+        {{{ body }}}
+      </article>
+    </main>
+    <footer>
+      <p>&copy; {{ copyright_year }} Sam Winslow</p>
+    </footer>
+  </body>
+</html>

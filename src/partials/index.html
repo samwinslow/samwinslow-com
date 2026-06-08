@@ -1,12 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sam Winslow</title>
+    <link rel="stylesheet" href="/css/index.css" />
   </head>
   <body>
-    <h1>Hello World</h1>
+    <h1>Sam Winslow</h1>
+    <main>
+      <ul class="post-list">
+        {{# posts }}
+        <li>
+          <a href="/post/{{ slug }}">{{ title }}</a>
+          <time>{{ date }}</time>
+          {{# copy }}<p class="post-copy">{{ copy }}</p>{{/ copy }}
+        </li>
+        {{/ posts }}
+        {{^ posts }}
+        <li>No posts yet.</li>
+        {{/ posts }}
+      </ul>
+    </main>
     <footer>
-      <p>&copy; {{ copyright_year }}</p>
+      <p>&copy; {{ copyright_year }} Sam Winslow</p>
     </footer>
     <script src="index.js"></script>
   </body>
