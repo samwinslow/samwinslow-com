@@ -3,11 +3,11 @@
   --head-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --mono-font-family: "SFMono-Regular",Consolas,"Liberation Mono",Menlo,Courier,monospace;
   --text: #000;
-  --muted: #bbb;
+  --muted: #808080;
   --tree-nav-background: transparent;
   --light: rgba(0,10,20,0.15);
-  /* --link: hsl(180, 80%, 32%); */
-  --link: blue;
+  --link: hsl(180, 80%, 32%);
+  /* --link: blue; */
   --bg-light: rgba(0,10,20,0.05);
 }
 
@@ -56,7 +56,7 @@ a {
 }
 
 a:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .uppercase {
@@ -143,4 +143,35 @@ iframe {
 
 header, footer {
   padding: 1rem;
+}
+
+.post-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.post-list li a {
+  font-family: var(--head-font-family);
+  font-size: 110%;
+}
+
+.post-list li p {
+  padding: 0;
+  margin: 0;
+}
+
+.post-list li time {
+  color: var(--muted);
+  font-size: 75%;
+  padding-left: 0.5rem;
+}
+
+.post-list p.post-copy {
+  padding: 0;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.post-tag {
+  font-size: 75%;
 }

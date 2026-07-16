@@ -14,7 +14,7 @@
         <li>
           <a href="/post/{{ slug }}">{{ title }}</a>
           <time>{{ date }}</time>
-          {{# copy }}<p class="post-copy">{{ copy }}</p>{{/ copy }}
+          <span class="post-tag">{{ tags }}</span>
         </li>
         {{/ posts }}
         {{^ posts }}
