@@ -76,6 +76,7 @@ img.responsive {
 
 img.profile {
   max-width: 10rem;
+  margin: 0 0 2rem 0;
 }
 
 table {
@@ -152,6 +153,10 @@ iframe {
 
 header, footer {
   padding: 1rem;
+}
+
+footer {
+  color: var(--muted);
 }
 
 header {

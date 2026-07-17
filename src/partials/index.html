@@ -10,9 +10,12 @@
     <main class="container">
       <img src="img/profile-la.jpg" class="profile" alt="Sam Winslow profile" />
       <h1>Sam Winslow</h1>
-      <p>Hi, I’m Sam. I am a software engineer pursuing a career change into professional aviation. I take an uncompromising approach to safety and reliability, and my experience in early-stage startup companies has made me flexible and pragmatic.</p>
+      <p>I am a software engineer and pilot based in the San Francisco Bay Area. I take an uncompromising approach to safety and reliability, and my experience in early-stage startup companies has made me flexible and pragmatic.</p>
       <p>
-        I hold a <strong>Commercial Pilot Certificate</strong> Single and Multiengine Land, <strong>Instrument Rating</strong>, <strong>High Performance</strong> and <strong>Complex</strong> endorsements.
+        I hold an FAA Commercial Pilot certificate (Single and Multiengine Land), Instrument Rating, high performance and complex endorsements.
+      </p>
+      <p>
+        Need an aircraft ferried somewhere, or assistance with the operations of a flight school, flying club, or partnership? I may be able to help. I am also open to part-time software development and startup advisory roles. 
       </p>
       <p>
         Contact me via
@@ -23,9 +26,8 @@
       <ul class="post-list">
         {{# posts }}
         <li>
-          <a href="/post/{{ slug }}">{{ title }}</a>
+          <a href="/post/{{ slug }}" title="{{ copy }}">{{ title }}</a>
           <time>{{ date }}</time>
-          <span class="post-tag">{{ tags }}</span>
         </li>
         {{/ posts }}
         {{^ posts }}
@@ -33,6 +35,12 @@
         {{/ posts }}
       </ul>
     </main>
+    <footer class="container">
+      <p>
+        &copy; {{ copyright_year }} Sam Winslow.
+        View code on <a href="https://github.com/samwinslow/samwinslow-com">GitHub</a>
+      </p>
+    </footer>
     <script src="index.js"></script>
   </body>
 </html>
