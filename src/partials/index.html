@@ -7,8 +7,19 @@
     <link rel="stylesheet" href="/css/index.css" />
   </head>
   <body>
-    <main class="container container-wide">
+    <main class="container">
+      <img src="img/profile-la.jpg" class="profile" alt="Sam Winslow profile" />
       <h1>Sam Winslow</h1>
+      <p>Hi, I’m Sam. I am a software engineer pursuing a career change into professional aviation. I take an uncompromising approach to safety and reliability, and my experience in early-stage startup companies has made me flexible and pragmatic.</p>
+      <p>
+        I hold a <strong>Commercial Pilot Certificate</strong> Single and Multiengine Land, <strong>Instrument Rating</strong>, <strong>High Performance</strong> and <strong>Complex</strong> endorsements.
+      </p>
+      <p>
+        Contact me via
+        <a href="https://linkedin.com/in/sambwinslow/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        or text
+        <a href="tel:PLACEHOLDER" id="tel-placeholder">1 (###) ###-####</a>
+      </p>
       <ul class="post-list">
         {{# posts }}
         <li>
@@ -22,9 +33,6 @@
         {{/ posts }}
       </ul>
     </main>
-    <footer>
-      <p>&copy; {{ copyright_year }} Sam Winslow</p>
-    </footer>
     <script src="index.js"></script>
   </body>
 </html>

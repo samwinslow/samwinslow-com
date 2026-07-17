@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="/css/index.css" />
   </head>
   <body>
-    <header>
-      <a href="/" class="uppercase">← Sam Winslow</a>
+    <header class="container">
+      <a href="/" class="uppercase">Sam Winslow</a>
     </header>
     <main>
       <article class="container">
@@ -18,9 +18,10 @@
           {{# copy }}<span class="post-copy"> — {{ copy }}</span>{{/ copy }}
         </p>
         {{{ body }}}
+        <a href="/">&larr; back</a>
       </article>
     </main>
-    <footer>
+    <footer class="container">
       <p>&copy; {{ copyright_year }} Sam Winslow</p>
     </footer>
   </body>

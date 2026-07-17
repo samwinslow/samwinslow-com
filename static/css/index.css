@@ -21,7 +21,7 @@ body {
   margin: 0;
   font-family: var(--base-font-family);
   line-height: 1.618;
-  font-size: 16px;
+  font-size: 18px;
   color: var(--text);
 }
 
@@ -32,6 +32,7 @@ section {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--head-font-family);
   line-height: 1;
+  letter-spacing: -1%;
 }
 
 h1 {
@@ -71,6 +72,10 @@ img {
 
 img.responsive {
   object-fit: cover;
+}
+
+img.profile {
+  max-width: 10rem;
 }
 
 table {
@@ -124,8 +129,12 @@ code {
   padding: 3rem 1rem 6rem 1rem;
 }
 
-.container-wide {
-  max-width: 50rem;
+header.container {
+  padding: 1rem;
+}
+
+header a {
+  font-size: 80%;
 }
 
 .backToHome {
@@ -145,9 +154,13 @@ header, footer {
   padding: 1rem;
 }
 
+header {
+  font-family: var(--head-font-family);
+}
+
 .post-list {
   list-style-type: none;
-  padding: 0;
+  padding: 4rem 0 0 0;
 }
 
 .post-list li a {
