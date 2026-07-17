@@ -25,12 +25,10 @@
     "exec": "tsx src/build.ts"
   },
   "dependencies": {
-    "concurrently": "^10.0.3",
     "esbuild": "^0.28.0",
     "gray-matter": "^4.0.3",
     "marked": "^18.0.5",
     "mustache": "^4.2.0",
-    "nodemon": "^3.1.14",
     "sharp": "^0.34.5",
     "tsx": "^4.22.4"
   },
@@ -39,6 +37,8 @@
     "@types/mustache": "^4.2.6",
     "@types/node": "^25.9.2",
     "@types/sharp": "^0.31.1",
+    "concurrently": "^10.0.3",
+    "nodemon": "^3.1.14",
     "serve": "^14.2.6",
     "typescript": "^6.0.3"
   }
