@@ -24,6 +24,7 @@ async function main() {
   const html = Mustache.render(template, {
     copyright_year: new Date().getFullYear(),
     posts: visiblePosts,
+    description: "Commercial Pilot, Software Engineer in the San Francisco Bay Area",
   });
   fs.writeFileSync(path.join(distDir, "index.html"), html);
   console.log("Built dist/index.html");

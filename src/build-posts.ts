@@ -5,6 +5,8 @@ import matter from "gray-matter";
 import { Marked } from "marked";
 import { processImage, type ProcessedImage } from "./process-images.js";
 
+const SITE_URL = "https://samwinslow.com";
+
 export interface PostFrontmatter {
   date: string;
   title: string;
@@ -115,6 +117,8 @@ export async function buildPosts(distDir: string): Promise<PostEntry[]> {
       ...frontmatter,
       body: customMarked.parse(content) as string,
       copyright_year: new Date().getFullYear(),
+      url: `${SITE_URL}/post/${slug}`,
+      image_url: frontmatter.image ? `${SITE_URL}${frontmatter.image}` : undefined,
     });
 
     fs.writeFileSync(path.join(outDir, "index.html"), html);
